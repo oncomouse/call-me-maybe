@@ -1,0 +1,28 @@
+{
+  "name": "daggy-maybe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+      "lint": "eslint src test"
+    , "test": "mocha --require babel-core/register"
+  },
+  "dependencies": {
+    "daggy": "^1.2.0",
+    "fantasy-land": "^3.5.0",
+    "sanctuary-type-classes": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.15.0",
+    "fantasy-laws": "fantasyland/fantasy-laws#davidchambers/everything",
+    "jsverify": "^0.8.3",
+    "mocha": "^4.1.0"
+  }
+}
