@@ -1,10 +1,10 @@
-const fl = require('fantasy-land')
-const laws = require('fantasy-laws')
-const assert = require('fantasy-laws/src/internal/assert')
-const Z = require('sanctuary-type-classes')
-const jsc = require('jsverify')
-const Maybe = require('../')
-const { suite, test } = require('mocha')
+import fl from 'fantasy-land'
+import laws from 'fantasy-laws'
+import assert from 'fantasy-laws/src/internal/assert'
+import Z from 'sanctuary-type-classes'
+import jsc from 'jsverify'
+import Maybe from '../'
+import { suite, test } from 'mocha'
 
 const MaybeArb = jsc.number.smap(Maybe.Just, maybe => maybe.value, Z.toString)
 const MaybeConcatArb = jsc.string.smap(

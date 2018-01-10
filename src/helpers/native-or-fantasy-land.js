@@ -1,6 +1,6 @@
 'use strict';
 
-const fl = require('fantasy-land');
+import fl from 'fantasy-land';
 const nativeOrFantasyLand = (target, method) => {
     if (typeof target[fl[method]] === 'function') {
         return fl[method];
@@ -10,4 +10,4 @@ const nativeOrFantasyLand = (target, method) => {
         throw new TypeError(`Could not find ${target}#${method} or ${target}#${fl[method]}.`);
     }
 };
-module.exports = nativeOrFantasyLand;
+export default nativeOrFantasyLand;

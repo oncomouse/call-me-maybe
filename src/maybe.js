@@ -1,10 +1,10 @@
 'use strict';
 
-const { taggedSum } = require('daggy');
-const { equals } = require('sanctuary-type-classes');
-const aliases = require('./helpers/fantasy-land-aliases');
-const { assertType, assertFunction, assertConcat } = require('./helpers/asserts');
-const nofl = require('./helpers/native-or-fantasy-land');
+import { taggedSum } from 'daggy';
+import { equals } from 'sanctuary-type-classes';
+import aliases from './helpers/fantasy-land-aliases';
+import { assertType, assertFunction, assertConcat } from './helpers/asserts';
+import nofl from './helpers/native-or-fantasy-land';
 
 // Maybe
 const assertMaybe = (method, value) => assertType(Maybe, method, value);
@@ -128,4 +128,4 @@ Maybe.prototype.alt = function (that) {
 aliases(Maybe);
 aliases(Maybe.prototype);
 
-module.exports = Maybe;
+export default Maybe;
