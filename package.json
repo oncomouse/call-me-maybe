@@ -12,7 +12,8 @@
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup index.js --config --sourcemap --output.file dist/call-me-maybe.js",
     "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup index.js --config --output.file dist/call-me-maybe.min.js",
-    "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:es"
+    "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:es",
+    "prepare": "yon run clean && yon test && yon run build"
   },
   "dependencies": {
     "daggy": "^1.2.0",
@@ -44,5 +45,14 @@
   },
   "pre-commit": [
     "test"
+  ],
+  "main": "lib/index.js",
+  "module": "es/maybe.js",
+  "jsnext:main": "es/maybe.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
   ]
 }
