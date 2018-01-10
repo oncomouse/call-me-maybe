@@ -5,8 +5,14 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src test",
-    "mocha": "mocha --require babel-core/register",
-    "test": "yon run lint && yon run mocha"
+    "mocha": "BABEL_ENV=test mocha --require babel-core/register",
+    "test": "yon run lint && yon run mocha",
+    "clean": "rimraf lib dist es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup index.js --config --sourcemap --output.file dist/call-me-maybe.js",
+    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup index.js --config --output.file dist/call-me-maybe.min.js",
+    "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:es"
   },
   "dependencies": {
     "daggy": "^1.2.0",
@@ -26,6 +32,17 @@
     "fantasy-laws": "fantasyland/fantasy-laws#davidchambers/everything",
     "jsverify": "^0.8.3",
     "mocha": "^4.1.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.53.4",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.1",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
     "yarn-or-npm": "^2.0.4"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

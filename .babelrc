@@ -1,9 +1,31 @@
 {
-	"presets": [[
-		"env", {
-			"targets": {
-				"node": "current"
-			}
-		}], "stage-0"],
-	"plugins": ["transform-runtime"]
+    "env": {
+        "commonjs": {
+            "presets": [
+                ["env", {
+                    "useBuiltIns": false
+                }]
+            ],
+            "plugins": []
+        },
+        "es": {
+            "presets": [
+                ["env", {
+                    "useBuiltIns": false,
+                    "modules": false
+                }]
+            ],
+            "plugins": []
+        },
+        "test": {
+            "presets": [
+                ["env", {
+                    "targets": {
+                        "node": "current"
+                    }
+                }],
+                "stage-0"],
+            "plugins": ["transform-runtime"],
+        }
+    }
 }
