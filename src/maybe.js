@@ -2,7 +2,7 @@
 
 import { taggedSum } from 'daggy'
 import { equals } from 'sanctuary-type-classes'
-import aliases from './helpers/fantasy-land-aliases'
+//import aliases from './helpers/fantasy-land-aliases'
 import { assertType, assertFunction } from './helpers/asserts'
 import nofl from './helpers/native-or-fantasy-land'
 
@@ -125,7 +125,14 @@ Maybe.prototype.alt = function (that) {
     })
 }
 // Dress ADT & member methods w/ Fantasy Land aliases:
-aliases(Maybe)
-aliases(Maybe.prototype)
-
+Maybe['fantasy-land/of'] = Maybe['of']
+Maybe['fantasy-land/empty'] = Maybe['empty']
+Maybe['fantasy-land/zero'] = Maybe['zero']
+Maybe.prototype['fantasy-land/equals'] = Maybe.prototype['equals']
+Maybe.prototype['fantasy-land/map'] = Maybe.prototype['map']
+Maybe.prototype['fantasy-land/ap'] = Maybe.prototype['ap']
+Maybe.prototype['fantasy-land/chain'] = Maybe.prototype['chain']
+Maybe.prototype['fantasy-land/concat'] = Maybe.prototype['concat']
+Maybe.prototype['fantasy-land/filter'] = Maybe.prototype['filter']
+Maybe.prototype['fantasy-land/alt'] = Maybe.prototype['alt']
 export default Maybe
