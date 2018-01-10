@@ -7,7 +7,7 @@ const nativeOrFantasyLand = (target, method) => {
     } else if (typeof target[method] === 'function') {
         return method
     } else {
-        throw new TypeError(`Could not find ${target}#${method} or ${target}#${fl[method]}.`)
+        throw new TypeError(`Could not find ${target}#${method} or ${target}#fantasy-land/${method}.`)
     }
 }
 export default nativeOrFantasyLand
