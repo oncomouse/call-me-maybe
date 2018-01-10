@@ -25,6 +25,13 @@ var config = {
         }),
         babel({
             exclude: 'node_modules/**'
+            , babelrc: false
+            , "presets": [
+                ["env", {
+                    "useBuiltIns": false,
+                    "modules": false
+                }]
+            ]
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(env)

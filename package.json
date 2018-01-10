@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src test",
-    "mocha": "BABEL_ENV=test mocha --require babel-core/register",
+    "mocha": "mocha --require babel-core/register",
     "test": "yon run lint && yon run mocha",
     "clean": "rimraf lib dist es",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
