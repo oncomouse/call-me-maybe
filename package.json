@@ -1,7 +1,7 @@
 {
   "name": "daggy-maybe",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
     "lint": "eslint src test",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "daggy": "^1.2.0",
-    "sanctuary-type-classes": "^8.0.0"
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -47,7 +47,6 @@
   "pre-commit": [
     "test"
   ],
-  "main": "lib/index.js",
   "module": "es/maybe.js",
   "jsnext:main": "es/maybe.js",
   "files": [

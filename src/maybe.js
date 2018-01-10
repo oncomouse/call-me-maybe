@@ -1,7 +1,7 @@
 'use strict'
 
 import { taggedSum } from 'daggy'
-import { equals } from 'sanctuary-type-classes'
+import equals from 'ramda/src/equals'
 //import aliases from './helpers/fantasy-land-aliases'
 import { assertType, assertFunction } from './helpers/asserts'
 import nofl from './helpers/native-or-fantasy-land'
