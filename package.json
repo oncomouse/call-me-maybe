@@ -1,5 +1,5 @@
 {
-  "name": "daggy-maybe",
+  "name": "@oncomouse/call-me-maybe",
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
