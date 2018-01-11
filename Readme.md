@@ -33,7 +33,7 @@ Maybe.zero() // Maybe.Nothing
 
 Return a `Maybe.Just` instance containing the supplied data.
 
-~~~
+~~~haskell
 Maybe#of :: Maybe f => a -> f a
 ~~~
 
@@ -41,7 +41,7 @@ Maybe#of :: Maybe f => a -> f a
 
 Return the empty (`Maybe.Nothing`) version of this type.
 
-~~~
+~~~haskell
 Maybe#empty :: Nothing
 ~~~
 
@@ -49,7 +49,7 @@ Maybe#empty :: Nothing
 
 Return the zero (`Maybe.Nothing`) version of this type.
 
-~~~
+~~~haskell
 Maybe#zero :: Nothing
 ~~~
 
@@ -69,7 +69,7 @@ a.map(x => x + 2) // Maybe.Just(9)
 
 Compare the equality of one `Maybe` with another.
 
-~~~
+~~~haskell
 equals :: Maybe f => f a ~> f b -> Boolean
 ~~~
 
@@ -79,7 +79,7 @@ Apply a transformation function to a `Maybe`.
 
 The transformation function does *not* itself return a `Maybe`.
 
-~~~
+~~~haskell
 map :: Maybe f => f a ~> (a -> b) -> f b
 ~~~
 
@@ -87,7 +87,7 @@ map :: Maybe f => f a ~> (a -> b) -> f b
 
 Called on a `Maybe` that contains a function with a `Maybe` that contains a value, return the `Maybe` that holds the result of the function applied to the value.
 
-~~~
+~~~haskell
 apply :: Maybe f => f (a -> b) ~> f a -> f b
 ~~~
 
@@ -95,7 +95,7 @@ apply :: Maybe f => f (a -> b) ~> f a -> f b
 
 Called on a `Maybe` that contains a value with a `Maybe` that contains a function, return the `Maybe` that holds the result of the function applied to the value.
 
-~~~
+~~~haskell
 ap :: Maybe f => f a ~> f (a -> b) -> f b
 ~~~
 
@@ -103,7 +103,7 @@ ap :: Maybe f => f a ~> f (a -> b) -> f b
 
 Called on a `Maybe` that contains a value with a function that takes a value and returns a `Maybe`, return the result of that function.
 
-~~~
+~~~haskell
 chain :: Maybe f => f a ~> (a -> f b) -> f b
 ~~~
 
@@ -111,7 +111,7 @@ chain :: Maybe f => f a ~> (a -> f b) -> f b
 
 Get the value of a `Maybe` but will throw an error if called on `Maybe.Nothing`.
 
-~~~
+~~~haskell
 unsafeGet :: Maybe f => f a ~> a
 ~~~
 
@@ -119,7 +119,7 @@ unsafeGet :: Maybe f => f a ~> a
 
 Called on a `Maybe` that contains a value with another value, return the value of the `Maybe` or the default value if the `Maybe` is `Maybe.Nothing`.
 
-~~~
+~~~haskell
 getOrElse :: Maybe f => f a ~> a -> a
 ~~~
 
@@ -127,7 +127,7 @@ getOrElse :: Maybe f => f a ~> a -> a
 
 Called on a `Maybe` whose value has a `concat()` or a `fantasy-land/concat()` method with another maybe containing the same kind of value, return a Maybe containing the result of concatenating the second value to the first.
 
-~~~
+~~~haskell
 concat :: Maybe f => f a ~> f a -> f a
 ~~~
 
@@ -135,7 +135,7 @@ concat :: Maybe f => f a ~> f a -> f a
 
 Called on a `Maybe` with two functions, return the result of the first if the `Maybe` is `Maybe.Nothing` and a `Maybe` with the result of the second function applied to the value of the `Maybe`.
 
-~~~
+~~~haskell
 fold :: Maybe f => f a ~> (_ -> f b) -> (a -> f b) -> f b
 ~~~
 
@@ -143,7 +143,7 @@ fold :: Maybe f => f a ~> (_ -> f b) -> (a -> f b) -> f b
 
 Called on a `Maybe` and function that takes a value and returns a Boolean, either return the `Maybe` or `Maybe.Nothing` if the Boolean is `false`.
 
-~~~
+~~~haskell
 filter :: Maybe f => f a ~> (a -> Boolean) -> f a
 ~~~
 
@@ -151,7 +151,7 @@ filter :: Maybe f => f a ~> (a -> Boolean) -> f a
 
 Called on a `Maybe` with another `Maybe`, return the first `Maybe` unless the first is `Maybe.Nothing`, in which case return the second `Maybe`.
 
-~~~
+~~~haskell
 alt :: Maybe f => f a ~> f a -> f a
 ~~~
 
