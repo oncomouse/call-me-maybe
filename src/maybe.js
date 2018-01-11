@@ -16,6 +16,7 @@ const Maybe = taggedSum('Maybe', {
 Maybe.of = Maybe.Just
 Maybe.empty = () => Maybe.Nothing
 Maybe.zero = () => Maybe.Nothing
+Maybe._equals = equals
 // equals :: Maybe f => f a -> f b -> Boolean
 Maybe.prototype.equals = function (that) {
     assertMaybe('Maybe#equals', that)
@@ -26,7 +27,7 @@ Maybe.prototype.equals = function (that) {
         })
         , Just: value => that.cata({
             Nothing: () => false
-            , Just: thatValue => equals(value, thatValue)
+            , Just: thatValue => Maybe._equals(value, thatValue)
         })
     })
 }
