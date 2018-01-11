@@ -1,7 +1,8 @@
 'use strict'
 
 import { taggedSum } from 'daggy'
-import equals from 'ramda/src/equals'
+//import equals from 'ramda/src/equals'
+import equals from 'fast-deep-equal'
 import { assertType, assertFunction } from './helpers/asserts'
 import nofl from './helpers/native-or-fantasy-land'
 
