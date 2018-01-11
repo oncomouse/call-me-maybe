@@ -1,8 +1,8 @@
-# Call Me Maybe – Daggy-based, Fantasyland-compliant Maybe
+# Call Me Maybe – Daggy-based, Fantasy Land-compliant Maybe
 
 ![GIF of "Call Me Maybe" Video](https://media.giphy.com/media/jRfNbVMf2zqZG/giphy.gif)
 
-This library is an implementation of the Maybe [ADT](https://en.wikipedia.org/wiki/Algebraic_data_type) based on Fantasyland's [daggy](https://github.com/fantasyland/daggy) implementation. [origamitower/folktale](https://github.com/origamitower/folktale) contains a very good implementation of the Maybe type, but it does not implement Fantasyland's [Alt](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/) specification. Folktale's libraries are great but they are hard to extend, so I wrote this implementation using the more extensible daggy as the base.
+This library is an implementation of the Maybe [ADT](https://en.wikipedia.org/wiki/Algebraic_data_type) based on Fantasy Land's [daggy](https://github.com/fantasyland/daggy) implementation. [origamitower/folktale](https://github.com/origamitower/folktale) contains a very good implementation of the Maybe type, but it does not implement Fantasy Land's [Alt](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/) specification. Folktale's libraries are great but they are hard to extend, so I wrote this implementation using the more extensible daggy as the base.
 
 ## Override Equality
 
@@ -16,6 +16,8 @@ Maybe._equals = equals; // Now using Ramda's equality check
 ~~~
 
 ## API
+
+Take a look at [this explanation from Fantasy Land](https://github.com/fantasyland/fantasy-land#type-signature-notation) for information on reading the function type signatures below.
 
 ### Type Methods
 
@@ -155,7 +157,7 @@ alt :: Maybe f => f a ~> f a -> f a
 
 ### Fantasy Land Interface
 
-The following methods from the API have Fantasyland compliant equivalents:
+The following methods from the API have Fantasy Land compliant equivalents:
 
 * `of` -> `fantasy-land/of`
 * `empty` -> `fantasy-land/empty`
@@ -177,19 +179,19 @@ equals(
 ) === true
 ~~~
 
-## Fantasyland Type Implementations
+## Fantasy Land Type Implementations
 
-This library implements the following Fantasyland specifications:
+This library implements the following Fantasy Land specifications:
 
-* Setoid
-* Semigroup
-* Monoid
-* Filterable
-* Functor
-* Apply
-* Applicative
-* Alt
-* Plus
-* Alternative
-* Chain
-* Monad
+* [Setoid](https://github.com/fantasyland/fantasy-land#setoid)
+* [Semigroup](https://github.com/fantasyland/fantasy-land#semigroup)
+* [Monoid](https://github.com/fantasyland/fantasy-land#monoid)
+* [Filterable](https://github.com/fantasyland/fantasy-land#filterable)
+* [Functor](https://github.com/fantasyland/fantasy-land#monoid)
+* [Apply](https://github.com/fantasyland/fantasy-land#monoid)
+* [Applicative](https://github.com/fantasyland/fantasy-land#applicative)
+* [Alt](https://github.com/fantasyland/fantasy-land#alt)
+* [Plus](https://github.com/fantasyland/fantasy-land#plus)
+* [Alternative](https://github.com/fantasyland/fantasy-land#alternative)
+* [Chain](https://github.com/fantasyland/fantasy-land#chain)
+* [Monad](https://github.com/fantasyland/fantasy-land#monad)
