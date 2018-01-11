@@ -13,13 +13,12 @@
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup index.js --config --sourcemap --output.file dist/call-me-maybe.js",
     "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup index.js --config --output.file dist/call-me-maybe.min.js",
-    "build:umd-minimal": "cross-env BABEL_ENV=es NODE_ENV=development rollup index.js --config --sourcemap --globals daggy:daggy --external daggy --output.file dist/call-me-maybe-minimal.js",
-    "build:umd-minimal:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup index.js --config --globals daggy:daggy --external daggy --output.file dist/call-me-maybe-minimal.min.js",
-    "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:umd-minimal && yon run build:umd-minimal:min && yon run build:es",
+    "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:es",
     "prepare": "yon run clean && yon test && yon run build"
   },
   "dependencies": {
-    "daggy": "^1.2.0",
+    "@oncomouse/daggy": "oncomouse/daggy",
+    "daggy": "oncomouse/daggy",
     "fast-deep-equal": "^1.0.0"
   },
   "devDependencies": {
@@ -44,7 +43,7 @@
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.1",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-uglify-es": "^0.0.1",
     "yarn-or-npm": "^2.0.4"
   },
   "pre-commit": [
