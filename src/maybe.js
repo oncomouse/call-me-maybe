@@ -19,6 +19,7 @@ Maybe.empty = () => Maybe.Nothing
 Maybe.zero = () => Maybe.Nothing
 // equals :: Maybe f => f a -> f b -> Boolean
 Maybe.prototype.equals = function (that) {
+    assertMaybe('Maybe#equals', that)
     return this.cata({
         Nothing: () => that.cata({
             Nothing: () => true
