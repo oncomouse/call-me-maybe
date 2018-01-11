@@ -19,7 +19,17 @@ Maybe._equals = equals; // Now using Ramda's equality check
 
 ### Type Methods
 
+The following methods are applied to the Typeclass itself:
+
+~~~javascript
+Maybe.of(5) // Maybe.Just(5)
+Maybe.empty() // Maybe.Nothing
+Maybe.zero() // Maybe.Nothing
+~~~
+
 #### `of` Method
+
+Return a `Maybe.Just` instance containing the supplied data.
 
 ~~~
 Maybe#of :: Maybe f => a -> f a
@@ -27,11 +37,15 @@ Maybe#of :: Maybe f => a -> f a
 
 #### `empty` Method
 
+Return the empty (`Maybe.Nothing`) version of this type.
+
 ~~~
 Maybe#empty :: Nothing
 ~~~
 
 #### `zero` Method
+
+Return the zero (`Maybe.Nothing`) version of this type.
 
 ~~~
 Maybe#zero :: Nothing
@@ -39,7 +53,19 @@ Maybe#zero :: Nothing
 
 ### Member Methods
 
+The following methods are available to members of the type:
+
+~~~javascript
+var a = Maybe.Just(7)
+var b = Maybe.Just(6)
+
+a.equals(b) // === false
+a.map(x => x + 2) // Maybe.Just(9)
+~~~
+
 #### `equals` Method
+
+Compare the equality of one `Maybe` with another.
 
 ~~~
 equals :: Maybe f => f a ~> f b -> Boolean
@@ -47,11 +73,17 @@ equals :: Maybe f => f a ~> f b -> Boolean
 
 #### `map` Method
 
+Apply a transformation function to a `Maybe`.
+
+The transformation function does *not* itself return a `Maybe`.
+
 ~~~
 map :: Maybe f => f a ~> (a -> b) -> f b
 ~~~
 
 #### `apply` Method
+
+Called on a `Maybe` that contains a function with a `Maybe` that contains a value, return the `Maybe` that holds the result of the function applied to the value.
 
 ~~~
 apply :: Maybe f => f (a -> b) ~> f a -> f b
@@ -59,11 +91,15 @@ apply :: Maybe f => f (a -> b) ~> f a -> f b
 
 #### `ap` Method
 
+Called on a `Maybe` that contains a value with a `Maybe` that contains a function, return the `Maybe` that holds the result of the function applied to the value.
+
 ~~~
 ap :: Maybe f => f a ~> f (a -> b) -> f b
 ~~~
 
 #### `chain` Method
+
+Called on a `Maybe` that contains a value with a function that takes a value and returns a `Maybe`, return the result of that function.
 
 ~~~
 chain :: Maybe f => f a ~> (a -> f b) -> f b
@@ -71,11 +107,15 @@ chain :: Maybe f => f a ~> (a -> f b) -> f b
 
 #### `unsafeGet` Method
 
+Get the value of a `Maybe` but will throw an error if called on `Maybe.Nothing`.
+
 ~~~
 unsafeGet :: Maybe f => f a ~> a
 ~~~
 
 #### `getOrElse` Method
+
+Called on a `Maybe` that contains a value with another value, return the value of the `Maybe` or the default value if the `Maybe` is `Maybe.Nothing`.
 
 ~~~
 getOrElse :: Maybe f => f a ~> a -> a
@@ -83,23 +123,31 @@ getOrElse :: Maybe f => f a ~> a -> a
 
 #### `concat` Method
 
+Called on a `Maybe` whose value has a `concat()` or a `fantasy-land/concat()` method with another maybe containing the same kind of value, return a Maybe containing the result of concatenating the second value to the first.
+
 ~~~
 concat :: Maybe f => f a ~> f a -> f a
 ~~~
 
 #### `fold` Method
 
+Called on a `Maybe` with two functions, return the result of the first if the `Maybe` is `Maybe.Nothing` and a `Maybe` with the result of the second function applied to the value of the `Maybe`.
+
 ~~~
-fold :: Maybe f => f a ~> (a -> f b) -> (a -> f b) -> f b
+fold :: Maybe f => f a ~> (_ -> f b) -> (a -> f b) -> f b
 ~~~
 
 #### `filter` Method
+
+Called on a `Maybe` and function that takes a value and returns a Boolean, either return the `Maybe` or `Maybe.Nothing` if the Boolean is `false`.
 
 ~~~
 filter :: Maybe f => f a ~> (a -> Boolean) -> f a
 ~~~
 
 #### `alt` Method
+
+Called on a `Maybe` with another `Maybe`, return the first `Maybe` unless the first is `Maybe.Nothing`, in which case return the second `Maybe`.
 
 ~~~
 alt :: Maybe f => f a ~> f a -> f a
