@@ -1,21 +1,21 @@
 import fl from 'fantasy-land'
 import laws from 'fantasy-laws'
 import assert from 'fantasy-laws/src/internal/assert'
-import Z from 'sanctuary-type-classes'
+import { toString, equals } from 'ramda'
 import jsc from 'jsverify'
 import Maybe from '../'
 import { suite, test } from 'mocha'
 
-const MaybeArb = jsc.number.smap(Maybe.Just, maybe => maybe.value, Z.toString)
+const MaybeArb = jsc.number.smap(Maybe.Just, maybe => maybe.value, toString)
 const MaybeConcatArb = jsc.string.smap(
     Maybe.Just
     , maybe => maybe.value
-    , Z.toString
+    , toString
 )
 const MaybeFuncArb = jsc.fn(jsc.number).smap(
     Maybe.Just
     , maybe=>maybe.value
-    , Z.toString
+    , toString
 )
 const FuncMaybeArb = jsc.fn(MaybeArb)
 suite('Maybe#<Setoid Laws>', () => {
@@ -34,13 +34,13 @@ suite('Maybe#<Setoid Laws>', () => {
     ))
 })
 suite('Maybe#<Semigroup Laws>', () => {
-    const { associativity } = laws.Semigroup(Z.equals)
+    const { associativity } = laws.Semigroup(equals)
     test('associativity', associativity(
         MaybeConcatArb, MaybeConcatArb, MaybeConcatArb
     ))
 })
 suite('Maybe#<Monoid Laws>', () => {
-    const { rightIdentity, leftIdentity } = laws.Monoid(Z.equals, Maybe)
+    const { rightIdentity, leftIdentity } = laws.Monoid(equals, Maybe)
     test('rightIdentity', rightIdentity(
         MaybeArb
     ))
@@ -49,15 +49,15 @@ suite('Maybe#<Monoid Laws>', () => {
     ))
 })
 suite('Maybe#<Filterable Laws>', () => {
-    const distributivity = assert.forall3((v, p, q) => Z.equals(
+    const distributivity = assert.forall3((v, p, q) => equals(
         v[fl.filter](x => p(x) && q(x))
         , v[fl.filter](p)[fl.filter](q)
     ))
-    const identity = assert.forall1(v => Z.equals(
+    const identity = assert.forall1(v => equals(
         v[fl.filter](() => true)
         , v
     ))
-    const annihilation = assert.forall2((v, w) => Z.equals(
+    const annihilation = assert.forall2((v, w) => equals(
         v[fl.filter](() => false)
         , w[fl.filter](() => false)
     ))
@@ -75,7 +75,7 @@ suite('Maybe#<Filterable Laws>', () => {
     ))
 })
 suite('Maybe#<Functor Laws>', () => {
-    const { identity, composition } = laws.Functor(Z.equals)
+    const { identity, composition } = laws.Functor(equals)
     test('identity', identity(
         MaybeArb
     ))
@@ -86,7 +86,7 @@ suite('Maybe#<Functor Laws>', () => {
     ))
 })
 suite('Maybe#<Apply Laws>', () => {
-    const { composition } = laws.Apply(Z.equals)
+    const { composition } = laws.Apply(equals)
     test('composition', composition(
         MaybeFuncArb
         , MaybeFuncArb
@@ -98,7 +98,7 @@ suite('Maybe#<Applicative Laws>', () => {
         identity
         , homomorphism
         , interchange
-    } = laws.Applicative(Z.equals, Maybe)
+    } = laws.Applicative(equals, Maybe)
     test('identity', identity(
         MaybeArb
     ))
@@ -109,7 +109,7 @@ suite('Maybe#<Applicative Laws>', () => {
     ))
 })
 suite('Maybe#<Alt Laws>', () => {
-    const { associativity, distributivity } = laws.Alt(Z.equals)
+    const { associativity, distributivity } = laws.Alt(equals)
     test('associativity', associativity(
 
         MaybeArb
@@ -128,7 +128,7 @@ suite('Maybe#<Plus Laws>', () => {
         rightIdentity
         , leftIdentity
         , annihilation
-    } = laws.Plus(Z.equals, Maybe)
+    } = laws.Plus(equals, Maybe)
 
     test('rightIdentity', rightIdentity(
         MaybeArb
@@ -141,7 +141,7 @@ suite('Maybe#<Plus Laws>', () => {
     )))
 })
 suite('Maybe#<Alternative Laws>', () => {
-    const { distributivity, annihilation } = laws.Alternative(Z.equals, Maybe)
+    const { distributivity, annihilation } = laws.Alternative(equals, Maybe)
     test('distributivity', distributivity(
         MaybeArb
         , MaybeFuncArb
@@ -153,7 +153,7 @@ suite('Maybe#<Alternative Laws>', () => {
     ))
 })
 suite('Maybe#<Chain Laws>', () => {
-    const { associativity } = laws.Chain(Z.equals)
+    const { associativity } = laws.Chain(equals)
     test('associativity', associativity(
         MaybeArb
         , FuncMaybeArb
@@ -161,7 +161,7 @@ suite('Maybe#<Chain Laws>', () => {
     ))
 })
 suite('Maybe#<Monad Laws>', () => {
-    const { rightIdentity, leftIdentity } = laws.Monad(Z.equals, Maybe)
+    const { rightIdentity, leftIdentity } = laws.Monad(equals, Maybe)
     test('leftIdentity', leftIdentity(
         jsc.fn(jsc.number)
         , MaybeArb
