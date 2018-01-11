@@ -172,7 +172,7 @@ The following methods from the API have Fantasy Land compliant equivalents:
 
 So, for instance:
 
-~~~
+~~~javascript
 equals(
     Maybe.of([6]).concat(Maybe.of[7])
     , Maybe['fantasy-land/of']([6])['fantasy-land/concat'](Maybe['fantasy-land/of']([7]))
