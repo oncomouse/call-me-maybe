@@ -44,18 +44,23 @@ Maybe.prototype.apply = function (that) {
     assertMaybe('Maybe#apply', that)
     return this.cata({
         Nothing: () => this
-        , Just: value => that.map(value)
+        , Just: value => {
+            assertFunction('Maybe#apply', value)
+            return that.map(value)
+        }
     })
 }
 // ap :: Maybe f => f a ~> f (a -> b) -> f b
 Maybe.prototype.ap = function (that) {
     assertMaybe('Maybe#ap', that)
-    //assertFunction(`Maybe#ap`, that.value)
     return this.cata({
         Nothing: () => this
         , Just: () => that.cata({
             Nothing: () => that
-            , Just: thatValue => this.map(thatValue)
+            , Just: thatValue => {
+                assertFunction('Maybe#ap', thatValue)
+                return this.map(thatValue)
+            }
         })
     })
 }
