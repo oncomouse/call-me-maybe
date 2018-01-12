@@ -93,7 +93,7 @@ var a = Maybe.Just(7)
 var b = Maybe.Just(6)
 var f = Maybe.of(x => x + 4)
 
-a.equals(b) // === false
+a.equals(b) // false
 a.map(x => x + 2) // Maybe.Just(9)
 f.apply(a) // Maybe.Just(11)
 a.ap(f) // Maybe.Just(11)
