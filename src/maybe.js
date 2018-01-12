@@ -77,11 +77,11 @@ Maybe.prototype.unsafeGet = function () {
     return this.cata({
         Nothing: () => {
             throw new TypeError(`
-Can't extract the value of a Nothing.
+Can't extract the value of Maybe.Nothing.
 
-    Since Nothing holds no values, it's not possible to extract one from them.
-    You might consider switching from Maybe#get to Maybe#getOrElse, or some other method
-    that is not partial.
+    You called unsafeGet on Maybe.Nothing, which has no value. This is not possible (hence
+    this error). You may wish to use Maybe#getOrElse in place of this method, to handle this
+    condition, should it occur, in the future.
 `)
         }
         , Just: value => value
