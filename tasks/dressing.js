@@ -7,7 +7,7 @@
  and gets us out of the trouble of having to include fantasy-land in the library.
  */
 import fl from 'fantasy-land'
-import Maybe from '../'
+import Maybe from '../src/maybe'
 import fs from 'fs'
 import path from 'path'
 import {promisify} from 'util'
