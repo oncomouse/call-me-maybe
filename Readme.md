@@ -21,12 +21,24 @@ Or
 yarn add @oncomouse/call-me-maybe
 ~~~
 
+You can now run `require('@oncomouse/call-me-maybe')` to access the library.
+
+## Using on Web Pages
+
+You can also include the library in web pages using [unpkg](https://unpkg.com):
+
+~~~html
+<script src="https://unpkg.com/@oncomouse/call-me-maybe/dist/call-me-maybe.min.js"></script>
+~~~
+
+This file includes the full environment needed to use the Maybe type in your projects.
+
 ## Override Equality
 
 This library uses [epoberezkin/fast-deep-equals](https://github.com/epoberezkin/fast-deep-equal) for equality checking. It is an ok (and small) implementation. Lodash, Ramda, and Sanctuary's equality methods are all around 40K, which is a lot to implement Setoid. If, however, you want to use a different library, you can add it to Maybe by re-assigning the value of `Maybe._equals`. For instance:
 
 ~~~javascript
-var Maybe = require('call-me-maybe');
+var Maybe = require('@oncomouse/call-me-maybe');
 var {equals} = require('ramda');
 
 Maybe._equals = equals; // Now using Ramda's equality check
@@ -51,7 +63,7 @@ Maybe.zero() // Maybe.Nothing
 Return a `Maybe.Just` instance containing the supplied data.
 
 ~~~haskell
-Maybe#of :: Maybe f => a -> f a
+of :: Maybe f => a -> f a
 ~~~
 
 #### `empty` Method
@@ -59,7 +71,7 @@ Maybe#of :: Maybe f => a -> f a
 Return the empty (`Maybe.Nothing`) version of this type.
 
 ~~~haskell
-Maybe#empty :: Nothing
+empty :: Nothing
 ~~~
 
 #### `zero` Method
@@ -67,7 +79,7 @@ Maybe#empty :: Nothing
 Return the zero (`Maybe.Nothing`) version of this type.
 
 ~~~haskell
-Maybe#zero :: Nothing
+zero :: Nothing
 ~~~
 
 ### Member Methods
