@@ -1,6 +1,6 @@
 ![Travis Build Status](https://api.travis-ci.org/oncomouse/call-me-maybe.svg?branch=master)
 
-# Call Me Maybe – Daggy-based, Fantasy Land-compliant Maybe
+# Call Me Maybe – Daggy-based, Fantasy-Land-compliant Maybe
 
 ![GIF of "Call Me Maybe" Video](https://media.giphy.com/media/jRfNbVMf2zqZG/giphy.gif)
 
