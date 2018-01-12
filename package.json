@@ -3,6 +3,23 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
+  "author": "Andrew Pilsch <apilsch@tamu.edu> (https://andrew.pilsch.com)",
+  "description": "An extensible implementation of the Maybe type for functional programming",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oncomouse/call-me-maybe"
+  },
+  "bugs": {
+    "url": "https://github.com/oncomouse/call-me-maybe/issues"
+  },
+  "homepage": "https://github.com/oncomouse/call-me-maybe",
+  "keywords": [
+    "functional",
+    "daggy",
+    "fantasy-land",
+    "type-classes",
+    "maybe"
+  ],
   "scripts": {
     "lint": "eslint src test",
     "mocha": "mocha --require babel-core/register",
