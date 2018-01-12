@@ -4,7 +4,7 @@
 
 ![GIF of "Call Me Maybe" Video](https://media.giphy.com/media/jRfNbVMf2zqZG/giphy.gif)
 
-This library is an implementation of the [Maybe])(https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) [ADT](https://en.wikipedia.org/wiki/Algebraic_data_type) based on Fantasy Land's [daggy](https://github.com/fantasyland/daggy) implementation.
+This library is an implementation of the [Maybe](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) [ADT](https://en.wikipedia.org/wiki/Algebraic_data_type) based on Fantasy Land's [daggy](https://github.com/fantasyland/daggy) implementation.
 
 [Folktale](https://github.com/origamitower/folktale) contains a very good implementation of the Maybe type, but it does not implement Fantasy Land's [Alt](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/) specification. Additionally, Folktale's Maybe type is not easily extended, so I wrote this one, using [daggy](https://github.com/fantasyland/daggy), which uses plain objects to build ADTs and is therefore very extensible.
 
