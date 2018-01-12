@@ -28,8 +28,8 @@
     "dress": "babel-node tasks/dressing.js",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup index.js --config --sourcemap --output.file dist/call-me-maybe.js",
-    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup index.js --config --output.file dist/call-me-maybe.min.js",
+    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup src/maybe.js --config --sourcemap --output.file dist/call-me-maybe.js",
+    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup src/maybe.js --config --output.file dist/call-me-maybe.min.js",
     "build": "yon run build:commonjs && yon run build:umd && yon run build:umd:min && yon run build:es",
     "prepare": "yon run clean && yon test && yon run build"
   },
