@@ -4,7 +4,7 @@ import assert from 'fantasy-laws/src/internal/assert'
 import { toString, equals } from 'ramda'
 import jsc from 'jsverify'
 import Maybe from '../'
-import { suite, test } from 'mocha'
+import { describe, test } from 'mocha'
 
 const MaybeArb = jsc.number.smap(Maybe.Just, maybe => maybe.value, toString)
 const MaybeConcatArb = jsc.string.smap(
@@ -18,7 +18,7 @@ const MaybeFuncArb = jsc.fn(jsc.number).smap(
     , toString
 )
 const FuncMaybeArb = jsc.fn(MaybeArb)
-suite('Maybe#<Setoid Laws>', () => {
+describe('Maybe#<Setoid Laws>', () => {
     const { reflexivity, symmetry, transitivity } = laws.Setoid
     test('reflexivity', reflexivity(
         MaybeArb
@@ -33,13 +33,13 @@ suite('Maybe#<Setoid Laws>', () => {
         , MaybeArb
     ))
 })
-suite('Maybe#<Semigroup Laws>', () => {
+describe('Maybe#<Semigroup Laws>', () => {
     const { associativity } = laws.Semigroup(equals)
     test('associativity', associativity(
         MaybeConcatArb, MaybeConcatArb, MaybeConcatArb
     ))
 })
-suite('Maybe#<Monoid Laws>', () => {
+describe('Maybe#<Monoid Laws>', () => {
     const { rightIdentity, leftIdentity } = laws.Monoid(equals, Maybe)
     test('rightIdentity', rightIdentity(
         MaybeArb
@@ -48,7 +48,7 @@ suite('Maybe#<Monoid Laws>', () => {
         MaybeArb
     ))
 })
-suite('Maybe#<Filterable Laws>', () => {
+describe('Maybe#<Filterable Laws>', () => {
     const distributivity = assert.forall3((v, p, q) => equals(
         v[fl.filter](x => p(x) && q(x))
         , v[fl.filter](p)[fl.filter](q)
@@ -74,7 +74,7 @@ suite('Maybe#<Filterable Laws>', () => {
         , MaybeArb
     ))
 })
-suite('Maybe#<Functor Laws>', () => {
+describe('Maybe#<Functor Laws>', () => {
     const { identity, composition } = laws.Functor(equals)
     test('identity', identity(
         MaybeArb
@@ -85,7 +85,7 @@ suite('Maybe#<Functor Laws>', () => {
         , jsc.fn(jsc.number)
     ))
 })
-suite('Maybe#<Apply Laws>', () => {
+describe('Maybe#<Apply Laws>', () => {
     const { composition } = laws.Apply(equals)
     test('composition', composition(
         MaybeFuncArb
@@ -93,7 +93,7 @@ suite('Maybe#<Apply Laws>', () => {
         , MaybeFuncArb
     ))
 })
-suite('Maybe#<Applicative Laws>', () => {
+describe('Maybe#<Applicative Laws>', () => {
     const {
         identity
         , homomorphism
@@ -108,7 +108,7 @@ suite('Maybe#<Applicative Laws>', () => {
         , jsc.number
     ))
 })
-suite('Maybe#<Alt Laws>', () => {
+describe('Maybe#<Alt Laws>', () => {
     const { associativity, distributivity } = laws.Alt(equals)
     test('associativity', associativity(
 
@@ -123,7 +123,7 @@ suite('Maybe#<Alt Laws>', () => {
         , jsc.fn(jsc.number)
     ))
 })
-suite('Maybe#<Plus Laws>', () => {
+describe('Maybe#<Plus Laws>', () => {
     const {
         rightIdentity
         , leftIdentity
@@ -140,7 +140,7 @@ suite('Maybe#<Plus Laws>', () => {
         jsc.number
     )))
 })
-suite('Maybe#<Alternative Laws>', () => {
+describe('Maybe#<Alternative Laws>', () => {
     const { distributivity, annihilation } = laws.Alternative(equals, Maybe)
     test('distributivity', distributivity(
         MaybeArb
@@ -152,7 +152,7 @@ suite('Maybe#<Alternative Laws>', () => {
         MaybeArb
     ))
 })
-suite('Maybe#<Chain Laws>', () => {
+describe('Maybe#<Chain Laws>', () => {
     const { associativity } = laws.Chain(equals)
     test('associativity', associativity(
         MaybeArb
@@ -160,7 +160,7 @@ suite('Maybe#<Chain Laws>', () => {
         , FuncMaybeArb
     ))
 })
-suite('Maybe#<Monad Laws>', () => {
+describe('Maybe#<Monad Laws>', () => {
     const { rightIdentity, leftIdentity } = laws.Monad(equals, Maybe)
     test('leftIdentity', leftIdentity(
         jsc.fn(jsc.number)
