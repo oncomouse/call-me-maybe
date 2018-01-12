@@ -12,38 +12,43 @@ import fs from 'fs'
 import path from 'path'
 import {promisify} from 'util'
 
-const methods = [];
+const read = promisify(fs.readFile)
 
-Object.keys(Maybe).map(method => {
+const dress = (type, name) => {
+    const methods = [];
 
-    if(
-        typeof Maybe[method] === 'function'
-        && Object.prototype.hasOwnProperty.call(fl, method)
-        && !Object.prototype.hasOwnProperty.call(Maybe, fl[method])
-    ) {
-        methods.push(`Maybe['${fl[method]}'] = Maybe['${method}']`)
+    Object.keys(type).map(method => {
+        if(
+            typeof type[method] === 'function'
+            && Object.prototype.hasOwnProperty.call(fl, method)
+            && !Object.prototype.hasOwnProperty.call(type, fl[method])
+        ) {
+            methods.push(`${name}['${fl[method]}'] = ${name}['${method}']`)
+        }
+    })
+    Object.keys(type.prototype).map(method => {
+        if(
+            typeof type.prototype[method] === 'function'
+            && Object.prototype.hasOwnProperty.call(fl, method)
+            && !Object.prototype.hasOwnProperty.call(type.prototype, fl[method])
+        ) {
+            methods.push(`${name}.prototype['${fl[method]}'] = ${name}.prototype['${method}']`)
+        }
+    })
+    if(methods.length > 0) {
+        methods.push(`export default ${name}`)
+        const outputFile = path.join(
+            __dirname
+            , '..'
+            , 'src'
+            , `${name.toLowerCase()}.js`
+        )
+        read(outputFile)
+            .then(contents => contents.toString())
+            .then(contents => contents.replace(`export default ${name}`, methods.join('\n')))
+            .then(contents => fs.writeFile(outputFile, contents, err => {if(err) throw err}))
+            .catch(err => console.log(err.message))
     }
-})
-Object.keys(Maybe.prototype).map(method => {
-    if(
-        typeof Maybe.prototype[method] === 'function'
-        && Object.prototype.hasOwnProperty.call(fl, method)
-        && !Object.prototype.hasOwnProperty.call(Maybe.prototype, fl[method])
-    ) {
-        methods.push(`Maybe.prototype['${fl[method]}'] = Maybe.prototype['${method}']`)
-    }
-})
-if(methods.length > 0) {
-    methods.push(`export default Maybe`)
-    const outputFile = path.join(
-        __dirname
-        , '..'
-        , 'src'
-        , 'maybe.js'
-    )
-    promisify(fs.readFile)(outputFile)
-        .then(contents => contents.toString())
-        .then(contents => contents.replace('export default Maybe', methods.join('\n')))
-        .then(contents => fs.writeFile(outputFile, contents))
-        .catch(err => console.log(err.message))
 }
+
+dress(Maybe, `Maybe`)
