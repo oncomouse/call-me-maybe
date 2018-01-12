@@ -14,7 +14,7 @@
                     "useBuiltIns": false
                 }]
             ],
-            "plugins": []
+            "plugins": ["add-module-exports"]
         }
     }
 }
