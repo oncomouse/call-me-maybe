@@ -1,6 +1,6 @@
 {
   "name": "@oncomouse/call-me-maybe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lib/maybe.js",
   "license": "MIT",
   "author": "Andrew Pilsch <apilsch@tamu.edu> (https://andrew.pilsch.com)",
