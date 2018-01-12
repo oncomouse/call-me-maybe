@@ -3,7 +3,7 @@ import laws from 'fantasy-laws'
 import assert from 'fantasy-laws/src/internal/assert'
 import { toString, equals } from 'ramda'
 import jsc from 'jsverify'
-import Maybe from '../'
+import Maybe from '../src/maybe'
 import { describe, test } from 'mocha'
 
 const ArbPrimitive = jsc.oneof(
