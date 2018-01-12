@@ -91,9 +91,20 @@ The following methods are available to members of the type:
 ~~~javascript
 var a = Maybe.Just(7)
 var b = Maybe.Just(6)
+var f = Maybe.of(x => x + 4)
 
 a.equals(b) // === false
 a.map(x => x + 2) // Maybe.Just(9)
+f.apply(a) // Maybe.Just(11)
+a.apply(f) // Maybe.Just(11)
+a.chain(x => Maybe.of(x+4)) // Maybe.Just(11)
+a.unsafeGet() // 7
+Maybe.Nothing.unsafeGet() // Error
+Maybe.Nothing.getOrElse(5) // 5
+Maybe.of([]).concat(Maybe.of([5])) // [5]
+Maybe.Nothing.fold(() => Maybe.Just(false), x => Maybe.Just(x + 1)) // Maybe.Just(false)
+Maybe.Just(6).filter(x => x < 5) // Maybe.Nothing
+Maybe.Nothing.alt(Maybe.of(6)) // Maybe.Just(6)
 ~~~
 
 #### `equals` Method
