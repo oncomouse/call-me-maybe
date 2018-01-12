@@ -1,7 +1,7 @@
 {
   "name": "@oncomouse/call-me-maybe",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "main": "lib/maybe.js",
   "license": "MIT",
   "author": "Andrew Pilsch <apilsch@tamu.edu> (https://andrew.pilsch.com)",
   "description": "An extensible implementation of the Maybe type for functional programming",
