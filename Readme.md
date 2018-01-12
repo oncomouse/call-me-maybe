@@ -96,15 +96,16 @@ var f = Maybe.of(x => x + 4)
 a.equals(b) // === false
 a.map(x => x + 2) // Maybe.Just(9)
 f.apply(a) // Maybe.Just(11)
-a.apply(f) // Maybe.Just(11)
+a.ap(f) // Maybe.Just(11)
 a.chain(x => Maybe.of(x+4)) // Maybe.Just(11)
 a.unsafeGet() // 7
 Maybe.Nothing.unsafeGet() // Error
+a.getOrElse(5) // 7
 Maybe.Nothing.getOrElse(5) // 5
 Maybe.of([]).concat(Maybe.of([5])) // [5]
 Maybe.Nothing.fold(() => Maybe.Just(false), x => Maybe.Just(x + 1)) // Maybe.Just(false)
-Maybe.Just(6).filter(x => x < 5) // Maybe.Nothing
-Maybe.Nothing.alt(Maybe.of(6)) // Maybe.Just(6)
+a.filter(x => x < 5) // Maybe.Nothing
+Maybe.Nothing.alt(a) // Maybe.Just(7)
 ~~~
 
 #### `equals` Method
