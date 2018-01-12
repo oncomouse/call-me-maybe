@@ -6,13 +6,37 @@ import jsc from 'jsverify'
 import Maybe from '../'
 import { describe, test } from 'mocha'
 
-const MaybeArb = jsc.number.smap(Maybe.Just, maybe => maybe.value, toString)
-const MaybeConcatArb = jsc.string.smap(
+const ArbPrimitive = jsc.oneof(
+    jsc.bool
+    , jsc.string
+    , jsc.number
+)
+const MaybeArb = jsc.oneof(
+    ArbPrimitive
+    , jsc.array(ArbPrimitive)
+    , jsc.record({
+        key1: ArbPrimitive
+        , key2: ArbPrimitive
+    })
+).smap(
     Maybe.Just
     , maybe => maybe.value
     , toString
 )
-const MaybeFuncArb = jsc.fn(jsc.number).smap(
+const MaybeConcatArb = jsc.array(ArbPrimitive).smap(
+    Maybe.Just
+    , maybe => maybe.value
+    , toString
+)
+const MaybeFuncArb = jsc.fn(jsc.oneof(
+    ArbPrimitive
+    , jsc.array(ArbPrimitive)
+    , jsc.string
+    , jsc.record({
+        key1: ArbPrimitive
+        , key2: ArbPrimitive
+    })
+)).smap(
     Maybe.Just
     , maybe=>maybe.value
     , toString
@@ -36,7 +60,9 @@ describe('Maybe#<Setoid Laws>', () => {
 describe('Maybe#<Semigroup Laws>', () => {
     const { associativity } = laws.Semigroup(equals)
     test('associativity', associativity(
-        MaybeConcatArb, MaybeConcatArb, MaybeConcatArb
+        MaybeConcatArb
+        , MaybeConcatArb
+        , MaybeConcatArb
     ))
 })
 describe('Maybe#<Monoid Laws>', () => {
