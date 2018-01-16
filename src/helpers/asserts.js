@@ -17,7 +17,7 @@ export const assertConcat = (method, target) => {
         throw new TypeError(`${method} expects a value that can be concated to, but was given ${target.value}.`)
     }
 }
-const determineTest = (type) => {
+/*const determineTest = (type) => {
     switch(typeof type) {
     case 'object':
         if(type instanceof Array) {
@@ -44,4 +44,4 @@ export const assertContains = (T, method, type, adt) => {
     if (T.is(adt) && determineTest(type)(adt.value)) {
         console.warn(`${method} expects a ${T} containing a value of type ${type} but received ${adt.value}`)
     }
-}
+}*/
