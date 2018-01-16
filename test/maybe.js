@@ -69,10 +69,10 @@ describe('Maybe', () => {
     describe('<Monoid Laws>', () => {
         const { rightIdentity, leftIdentity } = laws.Monoid(equals, Maybe)
         test('rightIdentity', rightIdentity(
-            MaybeArb
+            MaybeConcatArb
         ))
         test('leftIdentity', leftIdentity(
-            MaybeArb
+            MaybeConcatArb
         ))
     })
     describe('<Filterable Laws>', () => {

@@ -2,11 +2,17 @@
 
 import { taggedSum } from 'daggy'
 import equals from './helpers/equals'
-import { assertType, assertFunction } from './helpers/asserts'
+import {
+    assertType
+    , assertConcat
+    , assertFunction
+    , assertContains
+} from './helpers/asserts'
 import nofl from './helpers/native-or-fantasy-land'
 
 // Maybe
 const assertMaybe = (method, value) => assertType(Maybe, method, value)
+const assertMaybeContains = (method, type, maybe) => assertContains(Maybe, method, type, maybe)
 
 const Maybe = taggedSum('Maybe', {
     Just: ['value']
@@ -42,6 +48,7 @@ Maybe.prototype.map = function (transformation) {
 // apply :: Maybe f => f (a -> b) ~> f a -> f b
 Maybe.prototype.apply = function (that) {
     assertMaybe('Maybe#apply', that)
+    assertMaybeContains('Maybe#apply', 'function', this)
     return this.cata({
         Nothing: () => this
         , Just: value => {
@@ -53,6 +60,7 @@ Maybe.prototype.apply = function (that) {
 // ap :: Maybe f => f a ~> f (a -> b) -> f b
 Maybe.prototype.ap = function (that) {
     assertMaybe('Maybe#ap', that)
+    assertMaybeContains('Maybe#ap', 'function', that)
     return this.cata({
         Nothing: () => this
         , Just: () => that.cata({
@@ -97,6 +105,8 @@ Maybe.prototype.getOrElse = function (defValue) {
 // concat :: Maybe f => f a ~> f a -> f a
 Maybe.prototype.concat = function (that) {
     assertMaybe('Maybe#concat', that)
+    assertConcat('Maybe#concat', this)
+    //assertConcat('Maybe#concat', that)
     return this.cata({
         Nothing: () => that
         , Just: value => Maybe.Just(that.cata({
